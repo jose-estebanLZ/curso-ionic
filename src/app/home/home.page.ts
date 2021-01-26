@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { Color } from '../model/colors.model';
 import { ColorsService } from '../services/colors.service';
 
@@ -10,10 +11,14 @@ import { ColorsService } from '../services/colors.service';
 export class HomePage {
   colors: Color[] = [];
 
-  constructor(private colorsService: ColorsService) {
+  constructor(private colorsService: ColorsService, private router: Router) {
     this.colorsService.getColors().subscribe(res => {
       this.colors = res.data;
     });
+  }
+
+  itemClick(id: number){
+    this.router.navigate(['color', id]);
   }
 
 }
